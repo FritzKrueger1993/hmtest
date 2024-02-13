@@ -36,8 +36,8 @@ class wave{
 
     show(){
         stroke(this.color,this.sat,360);
-        strokeWeight(5);
-        fill(this.color,this.sat,360,180);
+        strokeWeight(2);
+        fill(this.color,this.sat*satFactor,360,180);
         beginShape();
         vertex(-30,height);
         for (let i = 0; i <= 400 + this.amplitude  * 2; i++) {
