@@ -61,8 +61,8 @@ function draw() {
   }
 
   // Picture FX Filter 
-  filterAmount = lerp(filterAmount,filterAmountDest,0.18);
-  filterAmountReal = map(pow(filterAmount,2),0,1,10,60);
+  filterAmount = lerp(filterAmount,filterAmountDest,0.015);
+  filterAmountReal = map(pow(filterAmount,4),0,1,10,60);
   filter(POSTERIZE, filterAmountReal);
 
   // update Saturation 
