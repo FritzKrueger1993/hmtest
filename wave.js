@@ -30,10 +30,9 @@ class wave{
         this.ampFactor=map(mouseY,0,height,2,0.1);
         this.ampFactor = Math.min(Math.max((this.ampFactor), 0.1), 2);
 
-        this.amplitude = lerp(this.amplitude,this.orgAmplitue*this.spreadAmp,0.008);
-        this.speed = lerp(this.speed,this.orgSpeed+this.spreadSpeed,0.002);    
+        this.amplitude = lerp(this.amplitude,this.orgAmplitue*this.spreadAmp,ampLerpFactor);
+        this.speed = lerp(this.speed,this.orgSpeed+this.spreadSpeed,0.002)*globalSpeed;
         this.x -= this.speed * this.speedFactor;
-
     }
 
     show(){

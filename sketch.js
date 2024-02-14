@@ -9,8 +9,10 @@ let satFactor = 0.3;
 let satDestination;
 let backWaves = [];
 let backWavesCount = 30;
-let filterAmount=60;
+let filterAmount=1;
 let filterAmountDest;
+let filterAmountReal;
+let ampLerpFactor;
 
 function preload(){
   img = loadImage('./data/img12.png')
@@ -41,22 +43,31 @@ function draw() {
   image(img, 0, 0);
   //background(300,43,334);
   //background(0,80*satFactor,360);
-  //background(0);
+  //background(360);
+
+  // Mouse Functions 
 
   if(mouseIsPressed){
     satDestination = 1;
-    filterAmountDest = 10;
+    filterAmountDest = 0;
+    globalSpeed = 1;
+    ampLerpFactor=0.01;
   }
   else{
     satDestination = 0.3;
-    filterAmountDest = 60;
+    filterAmountDest = 1;
+    globalSpeed = 0.95;
+    ampLerpFactor=0.0008;
   }
 
-  filterAmount = lerp(filterAmount,filterAmountDest,0.02);
- 
+  // Picture FX Filter 
+  filterAmount = lerp(filterAmount,filterAmountDest,0.18);
+  filterAmountReal = map(pow(filterAmount,2),0,1,10,60);
+  filter(POSTERIZE, filterAmountReal);
+
   // update Saturation 
-   satFactor = lerp(satFactor,satDestination,0.1);
-   filter(POSTERIZE, filterAmount);
+   satFactor = lerp(satFactor,satDestination,0.04);
+
   // update & draw Waves
   for (let i = 0; i < backWavesCount; i++){
     backWaves[i].update();
@@ -82,7 +93,7 @@ function draw() {
   /*
   fill(0,0,0);
   noStroke();
-  text(satFactor,20,20);
+  text(filterAmountReal,20,20);
   noFill();
   */
 }
